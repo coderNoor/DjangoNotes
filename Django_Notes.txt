@@ -1,0 +1,148 @@
+1.To check django install or not -->command prompt :python -m django --version
+
+2.To install-->pip install django
+
+3.To get all list of core commands in django--> django-admin
+
+4.To create project --> django-admin startproject "ProjectName"(change directory where u want to save project folder 
+   and type this command,it will create inside that folder)
+
+5.To add an App to Project -->python manage.py startapp "appname"(once app got created ,don't forget to add it on settings.py)
+
+6.Starting the Server--> python manage.py runserver
+
+7.Creating Migrations--->python manage.py makemigrations
+
+8.Migrate the Database -->python manage.py migrate 
+
+9.Creating a Super User for the Admin Panel -->python manage.py createsuperuser
+
+10.To Collect Static Files Into One Folder--> python manage.py collectstatic
+
+11.Routing flow -->Project URL(urls.py) --> app views(views.py) -->templates(home.html)
+
+
+##Notes :To integrate code in  Version Control Git follow below steps:
+
+1>go to project folder in command prompt by 
+      -->cd project path
+2>then type 
+      -->git init 
+  now git has been initialised in that folder 
+3>to check folder in particular path we used command 
+   --->dir
+But here by using dir we will not be able to see the hidden folder as git
+is a hidden folder
+
+4>So to check hidden folder ,
+  --->dir /ah
+5>So now we have to provide git name and email , so whenever we commit the
+  the code then git will show us particular name and email associated with
+   the change .
+   --->to do that , just do google ,git add name and email,then we 
+       will get first time setup instruction in git website .follow 
+       the instructions.
+ 
+6> So add new name and email type below command with your name and email.
+  -->git config --global user.name "Noor Developer"
+  -->git config --global user.email creativenoor04@gmail.com
+
+7>To check Status about commited files ,pending files etc 
+  --> git status 
+
+8>now we can add untracked files in git or can staged files using below command 
+  --> git add -A (this command use to add or stage all files)
+  --> git add filepath(this command use to add or stage particular files only)
+it will add all untracked files in git repository.
+
+9>Now all files are staged i.e files are available for commit .So staged files are those which
+  we can commit .
+
+10> To Commit staged files :
+    -->git commit -m "Our first commit! "
+So here in this command -m represent message we want to show after commit 
+and note :if we include exclamation mark in message inside double quote ,then keep space 
+          inside double quote before ending sentence.
+
+11>if we have made some changes on git and wants to remove all changes before stage or commit ,
+    --> git stash
+so this command will remove all changes which we have done after previous commit.
+So code will be as it was after last commit .
+
+12>To see all the details regarding commit :
+  --> git log
+
+13>In git log  we will have commit after and previous with some alphaNumeric text
+
+   So just type below command to get back to before commit stage
+   --->git checkout alphaNumeric text 
+
+  After this we can comeback to original state before commit
+14>if we want to go back again after commit then do again 
+   --->git checkout alphaNumeric text (this alphanumeric after commit i.e combine with head text)
+
+15>To add code into Github ,create new repository in github and copy the url 
+
+-->git remote add origin https://github.com/coderNoor/password_generator.git(this url generated after creating new repository i.e password_generator)
+-->git branch -M main
+-->git push -u origin main
+
+After this three line code will get push to github web repository.
+
+16>So now as our code in github , if we change something and update in github we have to following steps
+  -->git status
+  -->git add particular file path and file name or all git add -A
+  -->git commit -m "Commited message"
+  -->git push (So always after commit we have to do git push so that
+     all code get updated in GitHub.
+
+17>To get latest code on our local machine from github ,
+   -->git pull(git pull will update all changes code by anyone one github after latest by anyone )
+
+18>Branch in GitHub
+   --> Earlier we have 'Master' as default branch but now Github 
+       has changed it from 'Master' to 'Main'.
+ 
+
+Note :while creating templates following points need to be consider :
+a] Create templates folder inside the app and name of folder should be exactly "templates".
+b] Inside templates folder ,create one more folder which name should be matched with appname .
+c] Inside templates folder inside appname folder create files with '.html' extension	,
+    for example: home.html .
+d] Inside that Html files we can write all html code .
+e] <form action="{% url 'newpassword' %}">  used to pass url name in html ,here newpassword is name of url which we have mention in url.py
+f]<a></a> this anchor tab used to refer url i.e href so that we can go back to home page or to redirect into any url 
+   example :<a href="{% url 'home' %}">Go Back To Home Page</a>
+12.To pass parameters from views , in redering function add parameter like Dictionary ,
+    for example :
+     def home(request): 
+         return render(request,'generator/home.html',{'password':'ash2762@#$%12'})
+
+    -->This above function is present in app view .from this function we are passing paaword to html page .
+    -->To get that password value from html code ,just pass the key in HTml code inside two curly braces {{ password }} and 
+        there should be gap in side curly braces as in example i have written password in midle of curly brace .
+        So that home page will have password value when we render the page in browser. 
+
+13.then in url.py in project level , pass the path.
+   example :
+           path('',views.home)
+   
+   note:import the app views in url.py.
+        example: from generator import views 
+              where as 'generator' is  app name 
+
+14.we can use git for paticular project by passing below command in that project path:
+              Command-->git init
+15.As git will not appear in command prompt as we pass 'dir' command to get all files in that particular as git is hidden.
+   So to check hidden files in folder use command -->dir /ah
+16.Difference in Git and GitHub.
+    -->git is version control tool which helps to keep track our code .
+    -->Where as Github is a website where we can upload our code as repository which we can get anytime after browsing.
+    -->We do not need GitHub to use Git .
+ 
+
+    
+
+
+
+
