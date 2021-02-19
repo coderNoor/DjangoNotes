@@ -102,6 +102,31 @@ After this three line code will get push to github web repository.
 18>Branch in GitHub
    --> Earlier we have 'Master' as default branch but now Github 
        has changed it from 'Master' to 'Main'.
+   --> Main is default branch now.
+   -->The importance of branch is 'Main' will act as a Admin who have full control to push pull commit changes directly but if we have sub branch 
+      then Main or Master have can pull requests or delete request that were made my branch .So Branch helps us to control the changes and once verifying 
+      changes only main/master can accept changes .
+   -->To check branch :
+         -->git branch
+            this command will show all the branch we are using for that repository.
+   -->To add new branch in repository :
+         -->git branch BranchName
+            Here BranchName we can give any name as per our choice .
+   -->By default , we are in main branch but to get switch into new branch :
+         -->git branch checkout BranchName
+   -->Now do all staged in this path i.e add all changes in branch,commit all changes in branch ,do git push in same path(git add , git commit -m "message related to commit",git push) .
+      Then when we refresh in gitHub Repository ,there new branch get created with pull request .Then we can send this pull
+      request to other team members to review ,then if everthing ok then team lead/team member will approve to merge pull request .
+      
+      So once we do merge pull Request ,then this changes will get updated in Main/Master in repositories then we can delete the Branch.
+      we can delete branch because it purpose for review before pull done .
+
+   -->So for if we are working in big Project with large team ,its always better to create branch then add ,commit ,push and in git hub create pull request
+      which can be reviewed by the senior developer and after reviewing if all good then Merge Pull request into Main .And then Remove the Branch
+  
+
+
+
  
 
 Note :while creating templates following points need to be consider :
