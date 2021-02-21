@@ -202,6 +202,7 @@ After this three line code will get push to github web repository.
         for  that go to that app , inside app we have migration folder ,inside migration folder 0001_initial.py file will have all field details .
         So for our example :
               -->inside porfolio app ,inside migration folder,inside 0001_initial.py we have field related data .
+
 8.So whatever field we have created in model ,those all fields are represented as column of table whereas
      -->TableName is ClassName in model 
          for example : here we have created a class inside model is 
@@ -210,7 +211,7 @@ After this three line code will get push to github web repository.
      -->Similarly ColumnName will be all Fields defined in model
         for example:here we have created fields inside project class are 
 
-                  class Project(models.Model):
+                 class Project(models.Model):
                     title = models.CharField(max_length = 100)
                     description = models.CharField(max_length = 300)
                     images = models. ImageField( upload_to = 'portfolio/images/')
@@ -236,6 +237,7 @@ After this three line code will get push to github web repository.
      For Example :
               Python manage.py changepassword noorCoder
      So here noorCoder is username which admin password we want to change.
+
 -->Now after login into Admin Page ,we can add project models inside it .
    To do that we have to go to app , inside app we have admin.py file ,
    inside that file we have to add whatever model we want to add into admin page .
@@ -250,12 +252,41 @@ After this three line code will get push to github web repository.
      then add that class into admin .
             -->admin.site.register(Project)
            So here we have added class Project into Admin Page .So that we can have all fields which we have created in models inside Project class.
+
 -->So now after registering model if we go to admin page ,we can see Projects tab.
    So if we click on that we go to project page and if we click on add ,then we will be able to see all fields which we have created in that model.
    For Example : Here we have register 'Project' model which have four fields title ,description,image and url.
                  Now we can see all 4 properties in admin pages in which we can filled values and post in website.
                  here in admin page ,the properties those are in bold font are required field as we have not passed blank =True
                  Where non required field will be in normal font
+
+11.IMAGE Static Path set up: Lets add the root folder for adding all images .So that using that we can browse image or while clicking on image in admin,it will redirect the url
+    and fetch the image and open it browser .
+   So in setting.py ,we will define base directory i.e project folder path ,we will 
+   be storing all the image files for the Project.So this project level set up .So to do that we have to write following code inside setting.py.
+  
+   -->MEDIA_ROOT = BASE_DIR / 'Media'
+      this code will create one media folder inside the project folder ,So whenever we upload any image ,then that will get store in media.
+
+   -->After Adding Folder now we have to add urlpatterns for media files in urls.py and refer that in settings.py below static url. i.e
+      1)code inside urls.py :
+           -->from django.conf.urls.static import static
+           -->from django.conf import settings
+           -->urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+       Here we have added two imports and one url 
+
+      2)code inside setting.py :
+           -->MEDIA_URL = '/media/'
+
+       Here we have added name for url .So instead of media ,we can give any name ,that will be going refere in url.
+
+Note : if we want more details then in google we can go search for "django media images" then we will be able to get all above code.
+   
+
+
+
+   
 
 
             
