@@ -21,6 +21,33 @@
 
 11.Routing flow -->Project URL(urls.py) --> app views(views.py) -->templates(home.html)
 
+Note :while creating templates following points need to be consider :
+a] Create templates folder inside the app and name of folder should be exactly "templates".
+b] Inside templates folder ,create one more folder which name should be matched with appname .
+c] Inside templates folder inside appname folder create files with '.html' extension	,
+    for example: home.html .
+d] Inside that Html files we can write all html code .
+e] <form action="{% url 'newpassword' %}">  used to pass url name in html ,here newpassword is name of url which we have mention in url.py
+f]<a></a> this anchor tab used to refer url i.e href so that we can go back to home page or to redirect into any url 
+   example :<a href="{% url 'home' %}">Go Back To Home Page</a>
+12.To pass parameters from views , in redering function add parameter like Dictionary ,
+    for example :
+     def home(request): 
+         return render(request,'generator/home.html',{'password':'ash2762@#$%12'})
+
+    -->This above function is present in app view .from this function we are passing paaword to html page .
+    -->To get that password value from html code ,just pass the key in HTml code inside two curly braces {{ password }} and 
+        there should be gap in side curly braces as in example i have written password in midle of curly brace .
+        So that home page will have password value when we render the page in browser. 
+
+13.then in url.py in project level , pass the path.
+   example :
+           path('',views.home)
+   
+   note:import the app views in url.py.
+        example: from generator import views 
+              where as 'generator' is  app name 
+
 
 ##Notes :To integrate code in  Version Control Git follow below steps:
 
@@ -125,45 +152,121 @@ After this three line code will get push to github web repository.
       which can be reviewed by the senior developer and after reviewing if all good then Merge Pull request into Main .And then Remove the Branch
   
 
-
-
- 
-
-Note :while creating templates following points need to be consider :
-a] Create templates folder inside the app and name of folder should be exactly "templates".
-b] Inside templates folder ,create one more folder which name should be matched with appname .
-c] Inside templates folder inside appname folder create files with '.html' extension	,
-    for example: home.html .
-d] Inside that Html files we can write all html code .
-e] <form action="{% url 'newpassword' %}">  used to pass url name in html ,here newpassword is name of url which we have mention in url.py
-f]<a></a> this anchor tab used to refer url i.e href so that we can go back to home page or to redirect into any url 
-   example :<a href="{% url 'home' %}">Go Back To Home Page</a>
-12.To pass parameters from views , in redering function add parameter like Dictionary ,
-    for example :
-     def home(request): 
-         return render(request,'generator/home.html',{'password':'ash2762@#$%12'})
-
-    -->This above function is present in app view .from this function we are passing paaword to html page .
-    -->To get that password value from html code ,just pass the key in HTml code inside two curly braces {{ password }} and 
-        there should be gap in side curly braces as in example i have written password in midle of curly brace .
-        So that home page will have password value when we render the page in browser. 
-
-13.then in url.py in project level , pass the path.
-   example :
-           path('',views.home)
-   
-   note:import the app views in url.py.
-        example: from generator import views 
-              where as 'generator' is  app name 
-
-14.we can use git for paticular project by passing below command in that project path:
-              Command-->git init
-15.As git will not appear in command prompt as we pass 'dir' command to get all files in that particular as git is hidden.
-   So to check hidden files in folder use command -->dir /ah
-16.Difference in Git and GitHub.
+19.Difference in Git and GitHub.
     -->git is version control tool which helps to keep track our code .
     -->Where as Github is a website where we can upload our code as repository which we can get anytime after browsing.
     -->We do not need GitHub to use Git .
+
+
+#Models in Django Application
+
+1.Models are used to connect code and Database together i.e here models are the interface that has functionality to perform database task in python envoronment.
+  So Using Models we can write DB Query and connection in Django using Python code .So Basically Models used for interaction with DB .
+
+2.To use Model , In apps which we have created has model file .We have to open it  and create the class .
+
+3.So we can create class in model as follows :
+   --> class Project(models.Model)
+
+4.There are various db models have for DB .So Always we have to pick same field name to get connect with db .
+  All Fields name can be found on django documentation:
+  -->https://docs.djangoproject.com/en/3.1/ref/models/fields/
+
+5.So to define field i.e datatype for Db field , we can define in below ways:
+
+    -->class Project(models.Model):
+          title = models.CharField()
+    Here , After models. we can define any datatype which we need as per fields in Django which we want to mapped with our variable .
+    So Here we defining tittle variable as character field in db .So django has specific name to define its datatype to mapped in Db .
+    So Here Charfield is  defined as character datatype and inside parenthesis we can define max length of that character  . 
+    For example here , 
+        
+    -->title = models.CharField(max_length = 100)
+
+   So like Length other datatype may have more customize properties which can be defined inside parenthesis .So that things we can checkout
+   from  django documentation models fields link.
+6.If we want to make some field to accept  Null Value then in bracket we have to pass 'blank =True'
+
+    -->url = models.URLField(blank = True)
+     So here as we have passed blank true means we are accepting null value for that column . by default columns are blank = false i.e not null
+     So for those case if value are empty will cause error ,So to avoid error always passed blank = True if column ar not mandatory.
+     Note: Whenever we use imageField Data Type model the we must install Pillow in python otherwise we will get error regarding missing model
+7.Migration:
+     --> To update any changes in code to DB ,we need to do migrations .
+     To check if any migration pending:
+          --->python manage.py makemigrations
+     To make migrations:
+          -->python manage.py migrate
+     
+     -->If we want to check what migration we have made or which field we have created in models then 
+        for  that go to that app , inside app we have migration folder ,inside migration folder 0001_initial.py file will have all field details .
+        So for our example :
+              -->inside porfolio app ,inside migration folder,inside 0001_initial.py we have field related data .
+8.So whatever field we have created in model ,those all fields are represented as column of table whereas
+     -->TableName is ClassName in model 
+         for example : here we have created a class inside model is 
+                       class Project(models.Model):
+         So here Project is Table Name 
+     -->Similarly ColumnName will be all Fields defined in model
+        for example:here we have created fields inside project class are 
+
+                  class Project(models.Model):
+                    title = models.CharField(max_length = 100)
+                    description = models.CharField(max_length = 300)
+                    images = models. ImageField( upload_to = 'portfolio/images/')
+                    url = models.URLField(blank = True)
+
+        So here title,description,images and url are column name in table Project in database.
+
+10.Admin Page:
+   -->To go to admin page : 
+                          http://localhost:8000/admin
+
+   -->To create username and password type command :
+                                 
+                         python manage.py createsuperuser
+
+      then type the username which u want as admin ,
+      then type the emailid and the type the password that u want for login to admin page .
+      For Example :
+                Here we have username:noorCoder
+
+  -->If we want to change password then :
+                          python manage.py changepassword username
+     For Example :
+              Python manage.py changepassword noorCoder
+     So here noorCoder is username which admin password we want to change.
+-->Now after login into Admin Page ,we can add project models inside it .
+   To do that we have to go to app , inside app we have admin.py file ,
+   inside that file we have to add whatever model we want to add into admin page .
+   
+   Inside admin.py , write following code :
+       --> from .models import ClassName in model 
+       So here we have import class from models which we have created .
+       For Example :
+            --> from .models import Project
+          Here Project is class which we have created in model.
+
+     then add that class into admin .
+            -->admin.site.register(Project)
+           So here we have added class Project into Admin Page .So that we can have all fields which we have created in models inside Project class.
+-->So now after registering model if we go to admin page ,we can see Projects tab.
+   So if we click on that we go to project page and if we click on add ,then we will be able to see all fields which we have created in that model.
+   For Example : Here we have register 'Project' model which have four fields title ,description,image and url.
+                 Now we can see all 4 properties in admin pages in which we can filled values and post in website.
+                 here in admin page ,the properties those are in bold font are required field as we have not passed blank =True
+                 Where non required field will be in normal font
+
+
+            
+
+
+
+                
+        
+
+ 
+    
  
 
     
